@@ -8,7 +8,7 @@ module Rundeck
     end
 
     def self.find(session, name)
-      all(session).first{|p| p.name == name}
+      all(session).select{|p| p.name == name}.first
     end
 
     def initialize(session, hash)
