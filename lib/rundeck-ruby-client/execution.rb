@@ -19,10 +19,11 @@ module Rundeck
       @args = (hash['argstring'] || "").split
                                       .each_slice(2)
                                       .reduce({}){|acc,cur| acc[cur[0]] = cur[1]; acc}
+      @successful_nodes = hash['successfulNodes']
       @job = job
       @session = session
     end
-    attr_reader :id, :url, :status, :date_started, :date_ended, :user, :args, :job, :session
+    attr_reader :id, :url, :status, :date_started, :date_ended, :user, :args, :job, :session, :successful_nodes
 
     def self.find(session, id)
       result = session.get("api/1/execution/#{id}", *%w(result executions execution))
