@@ -4,8 +4,8 @@ module Rundeck
     def self.find(session, id)
       result = session.get("api/1/job/#{id}", 'joblist', 'job')
       return nil unless result
-      project = Project.find(session, result['context']['project'])
-      return nil unless project
+      name = result['context']['project'] rescue nil
+      project = name ? Project.find(name) : nil
       Job.new(session, project, result['id'], result['name'])
     end
 
