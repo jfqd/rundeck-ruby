@@ -33,7 +33,7 @@ module Rundeck
       results.map{|hash| Execution.from_hash(session, hash)}
     end
 
-    def execute!(args_hash)
+    def execute!(args_hash={})
       argstr=""
       args_hash.map {|param, value| argstr += "-#{param} \"#{value}\" "}
       encoded_args = URI::encode(argstr)
